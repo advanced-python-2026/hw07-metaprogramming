@@ -1,0 +1,29 @@
+[project]
+name = "hw07-metaprogramming"
+version = "0.1.0"
+description = "ДЗ 7 — Метапрограммирование"
+requires-python = ">=3.12"
+dependencies = []
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["hw07"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["N806"]
+
+[dependency-groups]
+dev = ["pytest>=8.0", "ruff>=0.8", "mypy>=1.13"]
