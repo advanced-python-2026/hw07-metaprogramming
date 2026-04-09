@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import pytest
+
 from hw07.make_dataclass import make_dataclass
 
 
