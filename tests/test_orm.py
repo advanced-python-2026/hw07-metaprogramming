@@ -230,6 +230,7 @@ class TestModelCommon:
     def test_inheritance(self, variant: int):
         """Дочерний класс наследует поля родителя."""
         if variant == 1:
+
             class Base(Model):
                 base_score = FloatField(min_value=0.0)
 
@@ -239,6 +240,7 @@ class TestModelCommon:
             assert "base_score" in Child._fields
             assert "child_email" in Child._fields
         else:
+
             class Base(Model):
                 base_id = IntField(min_value=0)
 
@@ -252,12 +254,14 @@ class TestModelCommon:
     def test_inheritance_does_not_modify_parent(self, variant: int):
         """Наследование не добавляет поля в родительский класс."""
         if variant == 1:
+
             class Parent(Model):
                 pscore = FloatField()
 
             class ChildA(Parent):
                 extra = EmailField()
         else:
+
             class Parent(Model):
                 pid = IntField()
 
