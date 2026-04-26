@@ -227,27 +227,42 @@ class TestModelCommon:
             _, cls = _make_model_v2()
         assert type(cls) is ModelMeta
 
-    def test_inheritance(self):
+    def test_inheritance(self, variant: int):
         """Дочерний класс наследует поля родителя."""
+        if variant == 1:
+            class Base(Model):
+                base_score = FloatField(min_value=0.0)
 
-        class Base(Model):
-            base_id = IntField(min_value=0)
+            class Child(Base):
+                child_email = EmailField()
 
-        class Child(Base):
-            child_name = StringField(max_length=50)
+            assert "base_score" in Child._fields
+            assert "child_email" in Child._fields
+        else:
+            class Base(Model):
+                base_id = IntField(min_value=0)
 
-        assert "base_id" in Child._fields
-        assert "child_name" in Child._fields
+            class Child(Base):
+                child_name = StringField(max_length=50)
+
+            assert "base_id" in Child._fields
+            assert "child_name" in Child._fields
         assert len(Child._fields) == 2
 
-    def test_inheritance_does_not_modify_parent(self):
+    def test_inheritance_does_not_modify_parent(self, variant: int):
         """Наследование не добавляет поля в родительский класс."""
+        if variant == 1:
+            class Parent(Model):
+                pscore = FloatField()
 
-        class Parent(Model):
-            pid = IntField()
+            class ChildA(Parent):
+                extra = EmailField()
+        else:
+            class Parent(Model):
+                pid = IntField()
 
-        class ChildA(Parent):
-            extra = StringField(max_length=10)
+            class ChildA(Parent):
+                extra = StringField(max_length=10)
 
         assert "extra" not in Parent._fields
         assert "extra" in ChildA._fields
@@ -1065,8 +1080,9 @@ class TestVariant2:
 
         data = {"a": [1, 2.0, "three", True, None]}
         obj = M(val=data)
-        # Должно быть JSON-сериализуемо
-        assert json.dumps(obj.val) is not None
+        serialized = json.dumps(obj.val)
+        assert isinstance(serialized, str)
+        assert '"a"' in serialized
 
     def test_jsonfield_empty_dict(self):
         class M(Model):
