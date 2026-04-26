@@ -33,7 +33,7 @@ class IntField(Field):
     """Целочисленное поле.
 
     Параметры: min_value, max_value (опциональные).
-    TypeError если значение не int (bool отвергается, несмотря на то что bool — подкласс int).
+    TypeError если значение не int.
     ValueError если значение вне диапазона.
     """
 
