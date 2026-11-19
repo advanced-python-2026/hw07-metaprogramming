@@ -6,7 +6,7 @@ import pytest
 
 STUDENT_FILE = Path.cwd() / "STUDENT.md"
 HW_NUMBER = 7
-SEMESTER = "2027-spring"
+SEMESTER = "2026-fall"
 
 VARIANT_FIELDS = {
     0: ("IntField", "StringField", "DateField", "BoolField"),

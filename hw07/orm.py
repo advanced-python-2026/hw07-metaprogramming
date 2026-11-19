@@ -161,6 +161,8 @@ class ModelMeta(type):
     """
 
     def __new__(mcs, name: str, bases: tuple[type, ...], namespace: dict[str, object]) -> ModelMeta:
+        if name == "Model":
+            return super().__new__(mcs, name, bases, namespace)
         raise NotImplementedError
 
 
