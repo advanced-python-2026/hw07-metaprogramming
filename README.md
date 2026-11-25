@@ -1,5 +1,7 @@
 # ДЗ 7 — Метапрограммирование
 
+Полный текст задания: https://courses.sabal.pro/advanced-python/homework/hw07
+
 Домашнее задание по курсу «Продвинутый Python».
 
 ## Задания
